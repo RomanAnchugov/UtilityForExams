@@ -145,13 +145,13 @@ public class NewJFrame extends javax.swing.JFrame {
         }
               
         this.ansCurrentLabel.setToolTipText("Remaining : " + (ansCount - numbersList.size()));
-
+        
         this.ansProgressBar.setValue(numbersList.size());
             
         for(int i = 0; i < numbersList.size(); i++){
             System.out.print(numbersList.get(i) + " ");
         }
-        System.out.println(""); 
+        System.out.println(" "); 
     }//GEN-LAST:event_ansGeneratorButtonActionPerformed
 
     private void remakeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remakeButtonActionPerformed
@@ -188,12 +188,10 @@ public class NewJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
-                
+                new NewJFrame().setVisible(true);                
             }
         });
     }
