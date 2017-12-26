@@ -8,6 +8,7 @@ package a;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -16,13 +17,19 @@ import java.util.Random;
 public class NewJFrame extends javax.swing.JFrame {
 
     private int ansCount = 0;
-    ArrayList numbersList;
-    ArrayList tasksTime;
+    private ArrayList numbersList;
+    private ArrayList tasksTime;
+    
+    private DefaultListModel listOfTimes;
     
     public NewJFrame() {
         initComponents();
+        
+        listOfTimes = new DefaultListModel();
+        
         this.setLocationRelativeTo(null);
         this.remakeButton.setEnabled(false);
+        taskTimesList.setModel(listOfTimes);
         
         numbersList = new ArrayList();
         tasksTime = new ArrayList();
@@ -45,6 +52,8 @@ public class NewJFrame extends javax.swing.JFrame {
         ansCurrentLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         remakeButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taskTimesList = new javax.swing.JList<>();
 
         jButton1.setText("jButton1");
 
@@ -79,23 +88,36 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        taskTimesList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(taskTimesList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ansCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(remakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addComponent(ansGeneratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ansCurrentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(ansProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 8, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ansCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(remakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addComponent(ansGeneratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 14, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(ansCurrentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ansProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +136,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ansProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -142,6 +166,8 @@ public class NewJFrame extends javax.swing.JFrame {
         this.ansCurrentLabel.setText("Текущий вопрос: " + current);
         numbersList.add(current);
         tasksTime.add(System.currentTimeMillis());
+        listOfTimes.addElement(System.currentTimeMillis());
+        
             
         if(numbersList.size() == ansCount){
             this.ansCurrentLabel.setText("Congrat. It will be 10");
@@ -163,6 +189,7 @@ public class NewJFrame extends javax.swing.JFrame {
         this.ansGeneratorButton.setText("Сгенерировать");
         this.ansGeneratorButton.setEnabled(true);
         this.ansCurrentLabel.setText("Ready?");
+        this.listOfTimes.removeAllElements();
         numbersList.clear();
     }//GEN-LAST:event_remakeButtonActionPerformed
 
@@ -208,6 +235,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton remakeButton;
+    private javax.swing.JList<String> taskTimesList;
     // End of variables declaration//GEN-END:variables
 }
