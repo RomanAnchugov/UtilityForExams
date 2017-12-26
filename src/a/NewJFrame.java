@@ -17,6 +17,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private int ansCount = 0;
     ArrayList numbersList;
+    ArrayList tasksTime;
     
     public NewJFrame() {
         initComponents();
@@ -24,6 +25,7 @@ public class NewJFrame extends javax.swing.JFrame {
         this.remakeButton.setEnabled(false);
         
         numbersList = new ArrayList();
+        tasksTime = new ArrayList();
     }
 
     /**
@@ -136,8 +138,10 @@ public class NewJFrame extends javax.swing.JFrame {
         while(numbersList.contains(current)){
             current = r.nextInt(ansCount) + 1;
         }
+        
         this.ansCurrentLabel.setText("Текущий вопрос: " + current);
         numbersList.add(current);
+        tasksTime.add(System.currentTimeMillis());
             
         if(numbersList.size() == ansCount){
             this.ansCurrentLabel.setText("Congrat. It will be 10");
@@ -149,7 +153,7 @@ public class NewJFrame extends javax.swing.JFrame {
         this.ansProgressBar.setValue(numbersList.size());
             
         for(int i = 0; i < numbersList.size(); i++){
-            System.out.print(numbersList.get(i) + " ");
+            System.out.print(tasksTime.get(i) + " ");
         }
         System.out.println(" "); 
     }//GEN-LAST:event_ansGeneratorButtonActionPerformed
